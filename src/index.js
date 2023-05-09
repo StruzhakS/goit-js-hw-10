@@ -17,13 +17,14 @@ inputField.addEventListener(
     fetchCountries(name)
       .then(data => {
         if (data.length > 10) {
-          Notiflix.Notify.info('Thea are many countries');
+          Notiflix.Notify.info(
+            'Too many matches found. Please enter a more specific name.'
+          );
           return;
         }
 
         if (data.length >= 2 && data.length <= 10) {
           data.map(data => {
-            //   console.log(data);
             markup = `<li class="country-list"><img src="${data.flags.png}" alt="" width=150>
       <p>${data.name.official}</p></li>`;
             countryList.insertAdjacentHTML('beforeend', markup);
