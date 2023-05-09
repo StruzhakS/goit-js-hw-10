@@ -3,7 +3,7 @@ import './css/styles.css';
 import { fetchCountries } from './js/fetchCountries';
 import debounce from 'lodash.debounce';
 
-const DEBOUNCE_DELAY = 1000;
+const DEBOUNCE_DELAY = 300;
 const inputField = document.querySelector('#search-box');
 const countryList = document.querySelector('.country-list');
 const countryInfo = document.querySelector('.country-info');
@@ -11,9 +11,11 @@ const countryInfo = document.querySelector('.country-info');
 inputField.addEventListener(
   'input',
   debounce(() => {
-    name = inputField.value.trim();
+    const name = inputField.value.trim();
     countryList.innerHTML = '';
     countryInfo.innerHTML = '';
+    if (!name) return;
+
     fetchCountries(name)
       .then(data => {
         if (data.length > 10) {
@@ -45,6 +47,5 @@ inputField.addEventListener(
       .catch(error =>
         Notiflix.Notify.failure('Oops, there is no country with that name')
       );
-  }),
-  DEBOUNCE_DELAY
+  }, DEBOUNCE_DELAY)
 );
