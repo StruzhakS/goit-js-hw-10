@@ -16,11 +16,11 @@ inputField.addEventListener(
     countryInfo.innerHTML = '';
     fetchCountries(name)
       .then(data => {
-        console.log(data);
         if (data.length > 10) {
           Notiflix.Notify.info('Thea are many countries');
           return;
         }
+
         if (data.length >= 2 && data.length <= 10) {
           data.map(data => {
             //   console.log(data);
@@ -31,8 +31,6 @@ inputField.addEventListener(
         } else {
           data.map(data => {
             const { flags, name, capital, population, languages } = data;
-            // languages.map(language => console.log(language));
-            // console.log(data);
             markup = ` <img src="${flags.png}" alt="" width=300>
       <h2>${name.official}</h2>
       <span class="name">Capital:</span>
