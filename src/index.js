@@ -26,22 +26,26 @@ inputField.addEventListener(
         }
 
         if (data.length >= 2 && data.length <= 10) {
-          data.map(data => {
-            markup = `<li class="country-list"><img src="${data.flags.png}" alt="" width=150>
+          const markup = data
+            .map(data => {
+              return `<li class="country-list"><img src="${data.flags.png}" alt="" width=150>
       <p>${data.name.official}</p></li>`;
-            countryList.insertAdjacentHTML('beforeend', markup);
-          });
+            })
+            .join('');
+          countryList.innerHTML = markup;
         } else {
-          data.map(data => {
-            const { flags, name, capital, population, languages } = data;
-            markup = ` <img src="${flags.png}" alt="" width=300>
+          const markup = data
+            .map(data => {
+              const { flags, name, capital, population, languages } = data;
+              return ` <img src="${flags.png}" alt="" width=300>
       <h2>${name.official}</h2>
       <span class="name">Capital:</span>
       <span class="text">${capital}</span> <br /><span class="name">Population:</span>
       <span class="text">${population}</span> <br /><span class="name"> Languages: </span
       ><span class="text">${Object.values(languages)}</span>`;
-            countryInfo.innerHTML = markup;
-          });
+            })
+            .join('');
+          countryInfo.innerHTML = markup;
         }
       })
       .catch(error =>
